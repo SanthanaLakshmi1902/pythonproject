@@ -1,0 +1,15 @@
+Objective: The goal of this project was to automate the process of sending birthday wishes via WhatsApp, ensuring timely and personalized messages without manual intervention.
+Technologies Used: The project used Python for scripting, Selenium for web automation, and pywhatkit for sending WhatsApp messages. I used Pandas to retrieve data from a CSV file that contains the name, phone number, and birthday date of contacts.
+import pywhatkit
+import pandas
+from datetime import datetime
+
+df=pandas.read_csv('birthday.csv')
+today= datetime.now().strftime('%d-%m')
+
+for index, row in df.iterrows():
+    if row['Birthday']==today:
+        name=row['Name']
+        phone=row['Phone']
+        message=f"Happy Birthday {name}...."
+        pywhatkit.sendwhatmsg(f"+{phone}",message,9,5)
